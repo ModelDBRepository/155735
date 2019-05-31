@@ -1,0 +1,25 @@
+This folder contains a script, DSB_simulator.py, that can be used in 
+conjunction with DS2M0Purk.py to compute the PRC of the DeSchutter-Bower
+model.
+
+To access the online help of the program, type at a prompt
+
+$ python DSB_simulator.py -h
+
+This will tell you the possible options.
+
+Briefly, the script has four working modes:
+
+1) iclamp: allows injecting constant steps of current into the cell.
+2) synapses: allows simulating the model during the activation of the
+   synapses distributed on the dendritic tree.
+3) PRC_syn: allows computing a PRC during synaptic activation, as was
+   done in Fig. S2 of the paper. See the description in the methods to
+   understand how the PRC is actually computed.
+4) PRC_iclamp: allows computing a PRC during current injection, as was
+   done in Fig. S3 of the paper.
+
+The last two working modes have several options, that are unfortunately
+not accessible via the command line or a configuration file. Therefore,
+if you wish to change these parameters, you will have to manually edit
+the file DSB_simulator.py: look for the main function.

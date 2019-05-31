@@ -1,0 +1,80 @@
+The mod-files contained in this directory implement the Khaliq-Raman
+model, described in the papers:
+
+1. Khaliq ZM, Gouwens NW, Raman IM (2003) The contribution of
+resurgent sodium current to high-frequency firing in Purkinje neurons:
+an experimental and modeling study. J Neurosci 23:4899-912.
+2. Raman IM, Bean BP (2001) Inactivation and recovery of sodium
+currents in cerebellar Purkinje neurons: evidence for two
+mechanisms. Biophys J 80:729-37.
+
+The following mod-files are the original ones (see entry 48332 on
+ModelDB) and they implement the deterministic equations of the model.
+
+bkpkj.mod
+ihpkj.mod
+kpkj.mod
+kpkj2.mod
+kpkjslow.mod
+pkjlk.mod
+rsg.mod
+cadiff.mod
+cap.mod
+
+The following mod-files are the modified versions of the
+correspondingly named ones and implement channel noise according to
+the algorithm described in
+
+Linaro, D., Storace, M., & Giugliano, M. (2011). Accurate and fast
+simulation of channel noise in conductance-based model neurons by
+diffusion approximation. PLoS Computational Biology, 7(3),
+e1001102. doi:10.1371/journal.pcbi.1001102
+
+available on ModelDB via accession number 127992.
+
+bkpkj_cn.mod
+ihpkj_cn.mod
+kpkj_cn.mod
+kpkj2_cn.mod
+kpkjslow_cn.mod
+rsg_cn.mod
+
+One of the mod-files (rsg_cn.mod) implementing channel noise in the Khaliq-Raman model
+requires the usage of the GNU scientific library. This also requires recompiling NEURON
+so that nrnivmodl links the GSL when compiling the mod-files.
+
+In order to achieve this, first install the GSL on your system, either manually or
+using one of the many package managers available for this purpose. Then, go to the
+directory where you have installed NEURON: here, I will assume that you have followed
+the instructions for compiling NEURON from source on a Linux machine, which are available
+at the address http://www.neuron.yale.edu/neuron/download/compile_linux.
+
+$ cd $HOME/neuron/nrn
+
+Set the environment variable $LDFLAGS to point to the additional libraries you want
+nrnivmodl to link, namely libgsl and libgslcblas. To do so, enter at a prompt
+
+$ export LDFLAGS='-lgsl -lgslcblas'
+
+This assumes that the library files are in a directory where the linker can find them.
+If that's not the case, you should add the path of that directory (here we will assume
+it is /usr/local/lib) to $LDFLAGS:
+
+$ export LDFLAGS='-L'$HOME'/local/lib -lgsl -lgslcblas'
+
+Additionally, it is necessary to set the variable $CFLAGS to point to the directory
+where the header files for the libraries are stored (in this example, /usr/local/include).
+This step is necessary only if they are in a folder not in the compiler path.
+
+$ export CFLAGS='-I'$HOME'/local/include'
+
+You can now reconfigure and recompile NEURON by issuing the commands
+
+$ make clean
+$ ./configure --prefix=`pwd`
+$ make
+$ make install
+
+This will cause nrnivmodl to _always_ link the gsl libraries whenever it compiles
+a MOD-file.
+

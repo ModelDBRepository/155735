@@ -1,0 +1,25 @@
+This folder contains a script, KR_simulator.py, that can be used to
+compute the PRC of the Khaliq-Raman model, both the deterministic and
+the stochastic (i.e., the one incorporating channel noise) version.
+
+To access the online help of the program, type at a prompt
+
+$ python KR_simulator.py -h
+
+This will tell you the possible options.
+
+Briefly, the program uses configuration files like the ones in the folder
+configs that specify both the properties of the model and the simulation
+parameters. To run a simulation, first copy (or link) the mod-files
+contained in the directory ../../mod-files/KR into this directory and then
+compile them with nrnivmodl using the following commands:
+
+$ ln -s ../../mod-files/KR/*.mod .
+$ nrnivmodl
+
+After this, you can run a simulation using the command
+
+$ python KR_simulator.py prc configs/prc_kr_high_cv_low_freq.cfg
+
+which will compute a PRC at low firing rate and in the high variability
+condition, as shown in Fig. 6A of the paper.

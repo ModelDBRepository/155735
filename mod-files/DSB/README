@@ -1,0 +1,13 @@
+The mod-files contained in this directory implement the ionic currents used by
+the De Schutter-Bower model, described in the papers:
+
+1. De Schutter, E., & Bower, J. M. (1994). An active membrane model of the
+cerebellar Purkinje cell. I. Simulation of current clamps in slice.
+Journal of Neurophysiology, 71(1), 375Ð400.
+2. De Schutter, E., & Bower, J. M. (1994). An active membrane model of the
+cerebellar Purkinje cell II. Simulation of synaptic responses.
+Journal of Neurophysiology, 71(1), 401Ð419.
+
+These mod-files are implementations of the original code
+written for the Genesis simulator by Erik De Schutter. The original (Genesis)
+implementation is available on ModelDB via accession number 7176.

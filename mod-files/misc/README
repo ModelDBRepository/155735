@@ -1,0 +1,8 @@
+This folder contains the following mod-files:
+
+vecevent.mod: implementation of VecStim, used to deliver stimulations
+at predefined times.
+
+sobol_pulses.mod: implementation of SobolPulses, used to deliver
+stimulations at quasi-random phases in an oscillation period controlled
+by a proportional-integral-derivative (PID) controller.

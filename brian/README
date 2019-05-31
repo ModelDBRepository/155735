@@ -1,0 +1,32 @@
+We provide a toy example network of synaptically uncoupled model 
+neurons that fire tonically and receive episodic common inputs. 
+Since an accurate mathematical model capable of reproducing our 
+experimental data is still missing, we resorted to artificially 
+altering the PRC of a simplified model neuron, by changing its 
+sub-threshold voltage dynamics (alternating between a leaky and a 
+non-leaky LIF model). 
+
+When the units of such a network behave as perfect integrators 
+(i.e., phase-independent PRC, such as PCs at low firing rates), 
+the episodic arrival of common inputs induces an identical phase 
+advance across the network, leaving their low population firing 
+coherence unaffected.
+When the units display phase-dependent PRCs (i.e., such as PCs firing
+ at high firing rates), the same common inputs activation induces 
+unequal phase shifts across the network, breaking the asynchronous 
+state and leading to a synchronization of neuronal firing. 
+This phenomenon is not novel and is reminiscent of the collective 
+properties of perfect resonators (see: Ermentrout et al. 2007). While 
+this is of course only a toy model, it may helps us to illustrate the 
+impact of PC response properties on network-level phenomena, as a 
+putative way to alternatively relay downstream or ignore common 
+inputs, depending only on the PCs firing rate.
+
+The "integrateAndFirePRC.py" script is a Python script with BRIAN code 
+to produce the figure in the "lif_prc_study.pdf" file.
+
+The IPython Notebook version of the same script is also available.
+You can launch it by doing: "ipython notebook --pylab=inline" and 
+loading the *.pynb file from the browser.
+
+ 

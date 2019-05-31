@@ -1,0 +1,39 @@
+﻿This folder contains the configuration file that can be used in LCG (Linaro et al. 2014) to compute the PRC using the closed-loop method.
+
+There is also a wrapper script to automatically write the configuration file and run the protocol using LCG that is called lcg-prc. You can type lcg-prc --help for more options, however the configuration file in this folder can be produced by typing:
+	
+	lcg-prc fclamp-sobol -D 100 -f 8 -H 100 -t 60 -n 10
+
+This will compute the Active Electrode Compensation kernel (AEC) so the amplifier's bridge balancing should not be used. Following the computation of the kernel for compensation the script will run the PRC estimation protocol separate in files with 100 (-D switch) pulses with 8 (-f switch) spikes between pulse while holding the cell initially with 100pA (-H switch), it will use a PID controller to achieve the spiking rate of 60Hz (-t switch) the protocol will be repeated 10 times (-n switch).
+
+Further options are:
+	-i interval between repetitions
+    -I input channel
+    -O output channel
+    -F sampling frequency 
+    --dryrun to simply write the configuration file without recording
+    --model to run the PRC on a model neuron (LIF)
+    -a amplitude of the perturbation (150pA default; square wave)
+    -d duration of the perturbation (1ms default)
+    -P proportional gain
+    -G integrative gain
+    -T Frequency estimator time constant
+	--no-kernel to skip the kernel computation for AEC.
+
+As explained in the 'lcg-prc help' there is also a mode for computing the PRC without the Sobol sequence - fclamp mode; a mode to compute without frequency clamp - steps mode, and finally a mode to compute the PRC using the indirect method - noise mode.
+
+Regarding the prc.xml file:
+	This is an example of a human readable configuration file that can be used to compute the Phase Response Curve of Neurons in vitro using the LCG software for electrophysiology experiments.
+	It can be executed with the command 'lcg-experiment -c prc.xml'; assuming you have linked a kernel.dat file (can be done using lcg-kernel; check the documentation).
+	Shortly: the configuration file contains a description of a PID controller and Frequency Estimator to keep the firing rate of the cell constant; it counts every 2 spikes after which it disables the PID controller, in the following spike it delivers the current waveform and waits 2 spikes to trigger again the PID controller. Every 8 spikes this cycle is repeated until 100 pulses have been delivered.
+
+Regarding the prc.stim file:
+	This file is a description of the waveform triggered by the prc.xml file. It can be adapted using the stimgen nomenclature to any waveform, particularly useful might be an alpha waveform that has code 12 and takes parameters amplitude, rise tau and decay tau.
+
+IMPORTANT NOTE:
+Currently the lcg-prc script exists only in the DEVELOP branch of LCG so you should do 'git checkout develop' in the lcg source code and re-install using the instructions in the manual in case you have the MASTER branch (you can check by doing 'git branch' in lcg source directory).
+
+If you have any questions or suggestions please contact: joao@tnb.ua.ac.be, daniele.linaro@uantwerpen.be or michele.giugliano@uantwerpen.be
+
+NOTE:
+It is fairly easy to adapt these protocols to inject waveforms of conductance instead of current, if you are interested in such application please contact the authors.

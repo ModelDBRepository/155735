@@ -1,0 +1,6 @@
+This folder contains minimal MATLAB functions to compute the PRC using the direct method.
+
+     - % computePRC.m 	    	      function to compute the PRC using the traditional method
+     - % computePRCcorrected.m 	      function to compute the PRC using the corrected method
+
+Use 'help <function name>' from matlab for further details. 
